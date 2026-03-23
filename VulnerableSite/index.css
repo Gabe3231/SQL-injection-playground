@@ -1,0 +1,19 @@
+body {
+    background-color: rgb(38, 37, 37);
+}
+
+.area {
+    width: 50%; 
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+}
+
+.title {
+    width: 50%; 
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+}
