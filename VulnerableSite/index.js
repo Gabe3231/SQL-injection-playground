@@ -19,6 +19,7 @@ const weakSiteApp = express();
 // allows app to use the user input by parsing it from HTML
 // plaintext input
 weakSiteApp.use(bodyParser.urlencoded({ extended: true }));
+
 // usable javascript object
 weakSiteApp.use(express.json());
 
@@ -41,12 +42,13 @@ weakSiteApp.post('/formSubmission', (req, res) => {
 
     // made vulnerable query a constant
     const VulnerableSQL = `INSERT INTO users (Name, Password) VALUES ('${Name}', '${Password}')`;
-    // db runs the vulnerable query
+    // db runs the vulnerable query and shoots error if there is one
     db.run(VulnerableSQL, (err) => {
         if (err) {
             console.log(err);
         }
     })
+    // response message
     res.send("User Added");
 });
 
