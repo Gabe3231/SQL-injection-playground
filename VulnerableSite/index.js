@@ -21,3 +21,9 @@ const bodyParser = require('body-parser');
 
 // creating my server
 const weakSiteApp = express();
+
+// allows app to use the user input by parsing it from HTML
+// plaintext input
+weakSiteApp.use(bodyParser.urlencoded({ extended: true }));
+// usable javascript object
+weakSiteApp.use(express.json());
