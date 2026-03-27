@@ -9,7 +9,7 @@ db.run(`
   CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     Name TEXT,
-    password TEXT
+    Password TEXT
   )
 `);
 
@@ -27,3 +27,24 @@ const weakSiteApp = express();
 weakSiteApp.use(bodyParser.urlencoded({ extended: true }));
 // usable javascript object
 weakSiteApp.use(express.json());
+
+// path to HTML and CSS files
+const path = require("path");
+// to service all files in directory
+weakSiteApp.use(express.static(__dirname));
+
+// where user input is beinf take from
+weakSiteApp.post('/formSubmission', (req, res) => {
+    const Name = req.body.Name;
+    const Password = req.body.Password;
+
+    // made vulnerable query a constant
+    const VulnerableSQL = `INSERT INTO users (Name, Password) VALUES ('${Name}', '${Password}')`;
+    // db runs the vulnerable query
+    db.run(VulnerableSQL)
+    res.send("User added");
+});
+
+// listening on port 3000 which the server will run on
+weakSiteApp.listen(3000, () => {
+    console.log("Server running on http://localhost:3000");});
